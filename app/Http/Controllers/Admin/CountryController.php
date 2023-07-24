@@ -39,7 +39,8 @@ class CountryController extends Controller
             $validator = Validator::make(
                 $input,
                 [
-                    'title' => 'required|max:70',
+                    'title' => 'required|max:70|unique:countries,slug',
+                    'slug' => 'required|max:70|unique:countries,slug',
                     'desc' => 'required|max:200',
                     'status' => 'required',
                 ],
@@ -93,7 +94,8 @@ class CountryController extends Controller
             $validator = Validator::make(
                 $data,
                 [
-                    'title' => 'required|max:70',
+                    'title' => 'required|max:70|unique:countries,slug',
+                    'slug' => 'required|max:70|unique:countries,slug',
                     'desc' => 'required|max:200',
                     'status' => 'required',
                 ],
@@ -109,7 +111,7 @@ class CountryController extends Controller
                 throw new \Exception('country Updated Error');
             }
             $update = $this->countryService->update($id, $data);
-            $message = 'Update country successfully <b>' . '<br>'.  $update->title . '</br>';
+            $message = 'Update country successfully <b>' . '<br>' . $update->title . '</br>';
             return redirect(route('admin.countries.index'))->with('success', $message);
 
         } catch (\Exception $e) {

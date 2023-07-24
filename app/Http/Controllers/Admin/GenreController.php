@@ -42,7 +42,8 @@ class GenreController extends Controller
             $validator = Validator::make(
                 $input,
                 [
-                    'title' => 'required|max:70',
+                    'title' => 'required|max:70|unique:genres,slug',
+                    'slug' => 'required|max:70|unique:genres,slug',
                     'desc' => 'required|max:200',
                     'status' => 'required',
                 ],
@@ -96,7 +97,8 @@ class GenreController extends Controller
             $validator = Validator::make(
                 $data,
                 [
-                    'title' => 'required|max:70',
+                    'title' => 'required|max:70|unique:genres,slug',
+                    'slug' => 'required|max:70|unique:genres,slug',
                     'desc' => 'required|max:200',
                     'status' => 'required',
                 ],

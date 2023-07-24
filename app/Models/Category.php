@@ -16,4 +16,10 @@ class Category extends Model
         'slug',
         'updated_at'
     ];
+
+    function movies()
+    {
+        return $this->hasMany(Movie::class)->where('status', 1)->limit(10);
+    }
+
 }

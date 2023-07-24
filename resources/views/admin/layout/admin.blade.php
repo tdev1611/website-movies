@@ -303,11 +303,11 @@
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-notebook menu-icon"></i><span class="nav-text">Film</span>
+                            <i class="icon-notebook menu-icon"></i><span class="nav-text">Movie</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="{{ route('admin.movies.index') }}">Danh Sách</a></li>
-
+                            <li><a href="{{ route('admin.movies.create') }}">Thêm mới</a></li>
                         </ul>
                     </li>
                     <li>

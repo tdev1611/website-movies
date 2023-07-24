@@ -14,4 +14,8 @@ class Country extends Model
         'status',
         'slug'
     ];
+    function movies()
+    {
+        return $this->hasMany(Movie::class)->where('status', 1)->limit(10);
+    }
 }

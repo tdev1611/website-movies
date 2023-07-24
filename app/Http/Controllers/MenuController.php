@@ -22,41 +22,46 @@ class MenuController extends Controller
         $this->genreService = $genreService;
     }
 
+
+
     public function category($slug)
     {
-
         try {
             $category = $this->categoryService->getCategory($slug);
-            return view('category', compact('category'));
+            $movies = $category->movies()->get();
+
+            return view('category', compact('category', 'movies'));
         } catch (\Exception $e) {
             abort(404)->$e->getMessage();
         }
 
-
-
     }
 
 
+    public function genre(Request $request, $slug)
+    {
+        try {
+            $category = $this->genreService->getCategory($slug);
+            $movies = $category->movies()->get();
+
+            return view('genre', compact('category','movies'));
+        } catch (\Exception $e) {
+            abort(404)->$e->getMessage();
+        }
+    }
 
 
     public function country(Request $request, $slug)
     {
         try {
             $category = $this->countryService->getCategory($slug);
-            return view('country', compact('category'));
+            $movies = $category->movies()->get();
+            return view('country', compact('category','movies'));
         } catch (\Exception $e) {
             abort(404)->$e->getMessage();
         }
 
     }
-    public function genre(Request $request, $slug)
-    {
-        try {
-            $category = $this->genreService->getCategory($slug);
-            return view('genre', compact('category'));
-        } catch (\Exception $e) {
-            abort(404)->$e->getMessage();
-        }
-    }
+
 
 }
