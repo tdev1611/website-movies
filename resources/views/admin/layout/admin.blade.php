@@ -11,7 +11,8 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+        crossorigin="anonymous"></script>
 
 </head>
 
@@ -45,7 +46,7 @@
             <div class="brand-logo">
                 <a href="{{ route('admin.home') }}">
                     Đức Hải Film
-                    
+
                 </a>
             </div>
         </div>
@@ -261,7 +262,7 @@
         <div class="nk-sidebar">
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
-                 
+
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
@@ -282,10 +283,21 @@
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-notebook menu-icon"></i><span class="nav-text">Country</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{ route('admin.countries.index') }}">Danh Sách</a></li>
+                            <li><a href="{{ route('admin.countries.create') }}">Thêm mới</a></li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-note menu-icon"></i><span class="nav-text">Genre</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./form-basic.html">Basic Form</a></li>
+                            <li><a href="{{ route('admin.genres.index') }}">Danh sách</a></li>
+                            <li><a href="{{ route('admin.genres.create') }}">Thêm mới</a></li>
 
                         </ul>
                     </li>
@@ -303,20 +315,14 @@
                             <i class="icon-menu menu-icon"></i><span class="nav-text">Episode</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="{{ route('admin.episodes.index') }}" aria-expanded="false">Basic Table</a></li>
-                            <li><a href="{{ route('admin.episodes.index') }}" aria-expanded="false">Data Table</a></li>
+                            <li><a href="{{ route('admin.episodes.index') }}" aria-expanded="false">Basic Table</a>
+                            </li>
+                            <li><a href="{{ route('admin.episodes.index') }}" aria-expanded="false">Data Table</a>
+                            </li>
                         </ul>
                     </li>
 
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-notebook menu-icon"></i><span class="nav-text">Country</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="{{ route('admin.countries.index') }}">Danh Sách</a></li>
 
-                        </ul>
-                    </li>
 
                 </ul>
             </div>
@@ -365,6 +371,45 @@
     <!-- ChartistJS -->
 
     <script src="{{ asset('admin/js/dashboard/dashboard-1.js') }}"></script>
+
+
+
+    <script>
+        $('input#title').keyup(function(event) {
+            var title, slug;
+            //Lấy text từ thẻ input title 
+            title = $(this).val();
+
+            //Đổi chữ hoa thành chữ thường
+            slug = title.toLowerCase();
+
+            //Đổi ký tự có dấu thành không dấus
+            slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+            slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+            slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+            slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+            slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+            slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+            slug = slug.replace(/đ/gi, 'd');
+            //Xóa các ký tự đặt biệt
+            slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi,
+                '');
+            //Đổi khoảng trắng thành ký tự gạch ngang
+            slug = slug.replace(/ /gi, "-");
+            //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
+            //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
+            slug = slug.replace(/\-\-\-\-\-/gi, '-');
+            slug = slug.replace(/\-\-\-\-/gi, '-');
+            slug = slug.replace(/\-\-\-/gi, '-');
+            slug = slug.replace(/\-\-/gi, '-');
+            //Xóa các ký tự gạch ngang ở đầu và cuối
+            slug = '@' + slug + '@';
+            slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+            //In slug ra textbox có id “slug”
+
+            $('input#slug').val(slug)
+        })
+    </script>
 
 </body>
 

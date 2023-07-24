@@ -1,9 +1,8 @@
 @extends('layout-client.layout')
-@section('title', $category->title)
-
+@section('title','Thể loại phim')
+    
 
 @section('content')
-  
  <div class="row container" id="wrapper">
             <div class="halim-panel-filter">
                <div class="panel-heading">
@@ -38,7 +37,7 @@
                            </a>
                         </div>
                      </article>
-                    
+
                   
                   </div>
                   <div class="clearfix"></div>
@@ -184,8 +183,6 @@
                                  </span>
                               </div>
                            </div>
-                          
-                          
                         </div>
                      </div>
                   </section>

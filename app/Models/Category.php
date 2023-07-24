@@ -13,6 +13,7 @@ class Category extends Model
         'title',
         'desc',
         'status',
+        'slug',
         'updated_at'
     ];
 }

@@ -6,7 +6,6 @@ use App\Models\Category;
 
 class CategoryService
 {
-
     function getAll()
     {
         return Category::paginate(10);

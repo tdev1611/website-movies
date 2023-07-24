@@ -1,8 +1,6 @@
 @extends('admin.layout.admin')
 @section('content')
     <div class="container-fluid mt-3">
-
-
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -25,14 +23,14 @@
                     </div>
                     {{-- status --}}
                     <div class="card-body">
-                        <h4 class="card-title">Add Category</h4>
-                        <form action="{{ route('admin.categories.store') }}" method="post" enctype="multipart/form-data">
+                        <h4 class="card-title">Add Country</h4>
+                        <form action="{{ route('admin.countries.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
-                                <label for="title" class="col-sm-2 col-form-label">Category Name</label>
+                                <label for="name" class="col-sm-2 col-form-label">Country Name</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="title" name="title"
-                                        placeholder="Enter Category Name">
+                                        placeholder="Enter Country Name">
                                     @error('title')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -42,7 +40,7 @@
                                 <label for="slug" class="col-sm-2 col-form-label"> Slug</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="slug" name="slug"
-                                        placeholder="Enter Category Name">
+                                        placeholder="Enter Country Slug">
                                     @error('slug')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -57,9 +55,7 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-
                             </div>
-
                             <div class="form-group row">
                                 <label for="status" class="col-sm-2 col-form-label">Status</label>
                                 <div class="col-sm-10">
@@ -79,12 +75,7 @@
                                 </div>
                             </div>
                         </form>
-
                     </div>
-
-
-
-
 
                 </div>
             </div>

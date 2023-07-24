@@ -8,11 +8,11 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-6">
-                                <h5>Edit Category</h5>
+                                <h5>Edit country</h5>
                             </div>
                             <div class="col-md-6">
-                                {{-- {{ route('category.index') }} --}}
-                                <a href="{{ route('admin.categories.index') }}" class="btn btn-primary float-right">Back</a>
+                              
+                                <a href="{{ route('admin.countries.index') }}" class="btn btn-primary float-right">Back</a>
                             </div>
                             <div class="col-md-12 text-center ">
                                 @if (session('success'))
@@ -30,17 +30,16 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.categories.update', $category->id) }}" method="post"
+                    <form action="{{ route('admin.countries.update', $country->id) }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="title">Category Name</label>
+                                    <label for="name">country Name</label>
                                     <input type="text" name="title" class="form-control" id="title"
-                                        value="{{ $category->title }}">
-
+                                        value="{{ $country->title }}">
                                 </div>
                                 @error('title')
                                     <span class="text-danger">{{ $message }}</span>
@@ -48,9 +47,9 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="slug">Slug</label>
+                                    <label for="slug"> Slug</label>
                                     <input type="text" name="slug" class="form-control" id="slug"
-                                        value="{{ $category->slug }}">
+                                        value="{{ $country->slug }}">
                                 </div>
                                 @error('slug')
                                     <span class="text-danger">{{ $message }}</span>
@@ -60,8 +59,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="description">Category Description</label>
-                                    <textarea name="desc" id="description" cols="30" rows="10" class="form-control">{{ $category->desc }}</textarea>
+                                    <label for="description">country Description</label>
+                                    <textarea name="desc" id="description" cols="30" rows="10" class="form-control">{{ $country->desc }}</textarea>
                                 </div>
                                 @error('desc')
                                     <span class="text-danger">{{ $message }}</span>
@@ -72,9 +71,9 @@
                                 <div class="form-group">
                                     <label for="status">Status</label>
                                     <select name="status" id="status" class="form-control">
-                                        <option value="1" @if ($category->status == 1) selected @endif>Active
+                                        <option value="1" @if ($country->status == 1) selected @endif>Active
                                         </option>
-                                        <option value="0" @if ($category->status == 0) selected @endif>
+                                        <option value="0" @if ($country->status == 0) selected @endif>
                                             Inactive</option>
                                     </select>
                                 </div>

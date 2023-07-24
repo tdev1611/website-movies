@@ -26,7 +26,6 @@ Route::group([''],function () {
     Route::resource('genres', GenreController::class,['as'=>'admin']);
     Route::resource('movies', MovieController::class,['as'=>'admin']);
     Route::resource('countries', CountryController::class,['as'=>'admin']);
-
 });
 
 

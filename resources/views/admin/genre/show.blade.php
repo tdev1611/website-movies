@@ -8,11 +8,10 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-6">
-                                <h5>Edit Category</h5>
+                                <h5>Edit genre</h5>
                             </div>
                             <div class="col-md-6">
-                                {{-- {{ route('category.index') }} --}}
-                                <a href="{{ route('admin.categories.index') }}" class="btn btn-primary float-right">Back</a>
+                                <a href="{{ route('admin.genres.index') }}" class="btn btn-primary float-right">Back</a>
                             </div>
                             <div class="col-md-12 text-center ">
                                 @if (session('success'))
@@ -30,17 +29,16 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.categories.update', $category->id) }}" method="post"
+                    <form action="{{ route('admin.genres.update', $genre->id) }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="title">Category Name</label>
+                                    <label for="title">genre Name</label>
                                     <input type="text" name="title" class="form-control" id="title"
-                                        value="{{ $category->title }}">
-
+                                        value="{{ $genre->title }}">
                                 </div>
                                 @error('title')
                                     <span class="text-danger">{{ $message }}</span>
@@ -50,7 +48,7 @@
                                 <div class="form-group">
                                     <label for="slug">Slug</label>
                                     <input type="text" name="slug" class="form-control" id="slug"
-                                        value="{{ $category->slug }}">
+                                        value="{{ $genre->slug }}">
                                 </div>
                                 @error('slug')
                                     <span class="text-danger">{{ $message }}</span>
@@ -60,8 +58,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="description">Category Description</label>
-                                    <textarea name="desc" id="description" cols="30" rows="10" class="form-control">{{ $category->desc }}</textarea>
+                                    <label for="description">genre Description</label>
+                                    <textarea name="desc" id="description" cols="30" rows="10" class="form-control">{{ $genre->desc }}</textarea>
                                 </div>
                                 @error('desc')
                                     <span class="text-danger">{{ $message }}</span>
@@ -72,9 +70,9 @@
                                 <div class="form-group">
                                     <label for="status">Status</label>
                                     <select name="status" id="status" class="form-control">
-                                        <option value="1" @if ($category->status == 1) selected @endif>Active
+                                        <option value="1" @if ($genre->status == 1) selected @endif>Active
                                         </option>
-                                        <option value="0" @if ($category->status == 0) selected @endif>
+                                        <option value="0" @if ($genre->status == 0) selected @endif>
                                             Inactive</option>
                                     </select>
                                 </div>
