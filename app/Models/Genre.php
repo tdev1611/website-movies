@@ -17,6 +17,6 @@ class Genre extends Model
 
     function movies()
     {
-        return $this->hasMany(Movie::class)->where('status', 1)->limit(10);
+        return $this->hasMany(Movie::class)->where('status', 1);
     }
 }

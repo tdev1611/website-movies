@@ -13,6 +13,8 @@
     <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
         crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
 
 </head>
 
@@ -340,8 +342,6 @@
         <!--**********************************
             Content body end
         ***********************************-->
-
-
         <!--**********************************
             Footer start
         ***********************************-->
@@ -367,10 +367,11 @@
     <script src="{{ asset('admin/js/settings.js') }}"></script>
     <script src="{{ asset('admin/js/gleek.js') }}"></script>
     <script src="{{ asset('admin/js/styleSwitcher.js') }}"></script>
-
     <!-- ChartistJS -->
-
     <script src="{{ asset('admin/js/dashboard/dashboard-1.js') }}"></script>
+
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="{{ asset('admin/js/jquery-database.js') }}"></script>
 
 
 
@@ -410,6 +411,19 @@
             $('input#slug').val(slug)
         })
     </script>
+
+    <script>
+        let table = new DataTable('#myTable');
+    </script>
+   
+
+    {{-- <script>
+        $(function() {
+            $("#sortable").sortable();
+        });
+    </script> --}}
+
+
 
 </body>
 

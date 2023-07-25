@@ -8,7 +8,7 @@ class MovieService
 {
     function getAll()
     {
-        return Movie::paginate(10);
+        return Movie::all();
     }
     //store
     function create($data)

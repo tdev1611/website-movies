@@ -8,7 +8,7 @@ class CategoryService
 {
     function getAll()
     {
-        return Category::where('status', 1)->orderBy('id', 'desc')->get();
+        return Category::where('status', 1)->orderBy('id', 'desc')->paginate(4);
     }
 
     function getCategory($slug)

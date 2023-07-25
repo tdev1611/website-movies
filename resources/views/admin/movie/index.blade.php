@@ -27,7 +27,7 @@
                         <div class="card-body">
                             <h4 class="card-title"> Movies ({{ $movies->count() }})</h4>
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table" id="myTable">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -42,7 +42,7 @@
                                             <th scope="col" class="text-right">Thao tác</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="sortable">
                                         @foreach ($movies as $key => $movie)
                                             <tr>
                                                 <th scope="row">{{ $key + 1 }}</th>
@@ -51,10 +51,11 @@
                                                     {{ $movie->slug }}
                                                 </td>
                                                 <td>
-                                                    {{  Str::limit($movie->desc, 20)  }}
+                                                    {{ Str::limit($movie->desc, 20) }}
                                                 </td>
                                                 <td>
-                                                    <img style="width:39px; border:1px solid " class="img-fluid" src="{{ url($movie->image) }}" alt="">
+                                                    <img style="width:39px; border:1px solid " class="img-fluid"
+                                                        src="{{ url($movie->image) }}" alt="">
                                                 </td>
                                                 <td>
                                                     {{ $movie->category->title }}
@@ -92,13 +93,14 @@
                     @else
                         <span class="text-center my-3">Chưa có bản ghi nào</span>
                     @endif
-
-
+                    {{-- {{ $movies->links() }} --}}
                 </div>
                 <!-- #/ container -->
             </div>
         </div>
     </div>
+
+
     <script>
         $(document).ready(function() {
             setTimeout(function() {
@@ -106,4 +108,9 @@
             }, 2000);
         })
     </script>
+
+
+   
+
+  
 @endsection

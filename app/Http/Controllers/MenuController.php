@@ -28,7 +28,7 @@ class MenuController extends Controller
     {
         try {
             $category = $this->categoryService->getCategory($slug);
-            $movies = $category->movies()->get();
+            $movies = $category->movies()->paginate(12);
 
             return view('category', compact('category', 'movies'));
         } catch (\Exception $e) {
@@ -42,7 +42,7 @@ class MenuController extends Controller
     {
         try {
             $category = $this->genreService->getCategory($slug);
-            $movies = $category->movies()->get();
+            $movies = $category->movies()->paginate(12);
 
             return view('genre', compact('category','movies'));
         } catch (\Exception $e) {
@@ -55,7 +55,7 @@ class MenuController extends Controller
     {
         try {
             $category = $this->countryService->getCategory($slug);
-            $movies = $category->movies()->get();
+            $movies = $category->movies()->paginate(12);
             return view('country', compact('category','movies'));
         } catch (\Exception $e) {
             abort(404)->$e->getMessage();
