@@ -11,7 +11,7 @@ class DetailService
 
     function show($slug)
     {
-        $movie = Movie::where('slug', $slug)->first();
+        $movie = Movie::where('slug', $slug)->where('status',1)->first();
         if (!$movie) {
              abort(404);
         }

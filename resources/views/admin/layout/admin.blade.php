@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
 
+
+
+
 </head>
 
 <body>
@@ -373,6 +376,36 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script src="{{ asset('admin/js/jquery-database.js') }}"></script>
 
+    <script>
+        $(document).ready(function() {
+            $('.select_year').change(function() {
+                let year = $(this).find(':selected').val();
+                let id_movies = $(this).attr('id');
+                console.log(id_movies);
+                $.ajax({
+                    url: "{{ route('admin.movies.update.year') }}",
+                    method:"GET",
+                    data: {
+                        year: year,
+                        id_movies: id_movies
+                    },
+                    success: function(data) {
+                        console.log(data.message);
+                       
+
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Có lỗi xảy ra khi cập nhật năm phim.');
+                    }
+
+                })
+            })
+
+
+        })
+    </script>
+
+
 
 
     <script>
@@ -415,7 +448,7 @@
     <script>
         let table = new DataTable('#myTable');
     </script>
-   
+
 
     {{-- <script>
         $(function() {

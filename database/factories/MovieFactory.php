@@ -23,13 +23,16 @@ class MovieFactory extends Factory
 
         return [
             'title' => $this->faker->unique()->name(),
+            'title_eng' => $this->faker->unique()->name(),
             'slug' => $this->faker->unique()->slug(),
             'desc' => $this->faker->paragraph(),
-            'image' => $this->faker->imageUrl(640, 480, 'animals', true, 'dogs', true, 'jpg'),
+            'image' => $this->faker->image('public/uploads/movies', 640, 480, null, false),
             'status' => Arr::random([1,2]),
-            'category_id' => $this->faker->randomElement([1, 2, 3]), 
-            'genre_id' => $this->faker->randomElement([1, 2, 3]), 
-            'country_id' => $this->faker->randomElement([1])
+            // 'category_id' => $this->faker->randomElement([1, 2, 3]), 
+            'category_id' => $this->faker->randomElement(Category::all())['id'],
+            'genre_id' => $this->faker->randomElement(Genre::all())['id'],
+            'country_id' => $this->faker->randomElement(Country::all())['id'],
+            
         ];
     }
 }

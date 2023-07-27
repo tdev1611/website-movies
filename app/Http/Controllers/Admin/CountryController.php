@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Sevices\Admin\CountryService;
 use Illuminate\Support\Facades\Validator;
-
+use App\Models\Country;
 
 class CountryController extends Controller
 {
@@ -94,8 +94,8 @@ class CountryController extends Controller
             $validator = Validator::make(
                 $data,
                 [
-                    'title' => 'required|max:70|unique:countries,slug',
-                    'slug' => 'required|max:70|unique:countries,slug',
+                    'title' => 'required|max:70|unique:countries,slug,' . Country::find($id)->id,
+                    'slug' => 'required|max:70|unique:countries,slug,' . Country::find($id)->id,
                     'desc' => 'required|max:200',
                     'status' => 'required',
                 ],

@@ -32,13 +32,18 @@
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Tên movie</th>
-                                            <th scope="col">Slug </th>
+                                            <th scope="col">Tên tiếng anh</th>
+                                            {{-- <th scope="col">Slug </th> --}}
                                             <th scope="col">Mô tả</th>
                                             <th scope="col">Image</th>
                                             <th scope="col">Danh mục</th>
                                             <th scope="col">Thể loại</th>
                                             <th scope="col">Quốc gia</th>
                                             <th scope="col">Trạng thái</th>
+                                            <th scope="col">Nổi bật</th>
+                                            <th scope="col">Ngày tạo</th>
+                                            <th scope="col">Ngày cập nhật</th>
+                                            <th scope="col">Năm</th>
                                             <th scope="col" class="text-right">Thao tác</th>
                                         </tr>
                                     </thead>
@@ -46,9 +51,12 @@
                                         @foreach ($movies as $key => $movie)
                                             <tr>
                                                 <th scope="row">{{ $key + 1 }}</th>
-                                                <td>{{ $movie->title }}</td>
+                                                <td> {{ Str::limit($movie->title, 10) }}
+                                                </td>
+                                                {{-- <td> {{ Str::limit($movie->title_eng, 10) }} --}}
+                                                </td>
                                                 <td>
-                                                    {{ $movie->slug }}
+                                                    {{ Str::limit($movie->slug, 10) }}
                                                 </td>
                                                 <td>
                                                     {{ Str::limit($movie->desc, 20) }}
@@ -73,17 +81,52 @@
                                                         <span class="badge badge-danger">Ẩn</span>
                                                     @endif
                                                 </td>
+                                                <td>
+                                                    @if ($movie->feature == 1)
+                                                        <span class="badge badge-success">Hiện</span>
+                                                    @else
+                                                        <span class="badge badge-primary">Ẩn</span>
+                                                    @endif
+                                                </td>
 
+                                                <td>
+                                                    {{ $movie->created_at }}
+                                                </td>
+                                                <td>
+                                                    {{ $movie->updated_at }}
+                                                </td>
+                                                <td>
+
+
+                                                    <select id="{{ $movie->id }}" name="year" class="select_year">
+                                                        @php
+                                                            $startYear = 2001;
+                                                            $endYear = 2023;
+                                                            for ($year = $startYear; $year <= $endYear; $year++) {
+                                                                $selected = $movie->year == $year ? 'selected' : '';
+                                                                
+                                                                echo '<option value="' . $year . '" ' . $selected . '>' . $year . '</option>';
+
+                                                            }
+                                                        @endphp
+                                                    </select>
+
+
+
+                                                </td>
                                                 <td class="d-flex justify-content-end">
-                                                    <a href="{{ route('admin.movies.edit', $movie->id) }}"
+                                                    <a style="font-size:14px; padding:7px 10px"
+                                                        href="{{ route('admin.movies.edit', $movie->id) }}"
                                                         class="btn btn-primary mr-2">Sửa</a>
                                                     <form action="{{ route('admin.movies.destroy', $movie->id) }}"
                                                         method="post">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button class="btn btn-danger" type="submit">Xóa</button>
+                                                        <button class="btn btn-danger" style="padding:7px 10px"
+                                                            type="submit">Xóa</button>
                                                     </form>
                                                 </td>
+
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -110,7 +153,7 @@
     </script>
 
 
-   
 
-  
+
+
 @endsection

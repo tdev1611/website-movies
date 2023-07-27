@@ -30,4 +30,6 @@ Route::group([''],function () {
 
 
 
+Route::get('movies-update-year',[MovieController::class,'updateYear'])->name('admin.movies.update.year');
+
 ?>

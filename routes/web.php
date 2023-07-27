@@ -27,7 +27,7 @@ Route::get('/the-loai/{slug}', [MenuController::class, 'genre'])->name('genre');
 
 
 Route::get('/xem-phim/{slug}', [WatchController::class, 'watch'])->name('movie.watch');
-Route::get('/chi-tiet/{slug}', [DetailController::class, 'index'])->name('movie.detail');
+Route::get('/chi-tiet/{slug}.html', [DetailController::class, 'index'])->name('movie.detail');
 
 
 

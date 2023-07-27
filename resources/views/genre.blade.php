@@ -23,9 +23,9 @@
                      @forelse ($movies as $movie)
                      <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-27021">
                         <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php" title="VŨNG LẦY PHẦN 1">
+                           <a class="halim-thumb" href="{{ route('movie.detail', $movie->slug) }}" title="VŨNG LẦY PHẦN 1">
                               <figure><img class="lazy img-responsive" src="{{ url($movie->image) }}" alt="VŨNG LẦY PHẦN 1" title="VŨNG LẦY PHẦN 1"></figure>
-                              <span class="status">5/5</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
+                              <span class="status">5/5</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>{{ $movie->subtitles }}</span> 
                               <div class="icon_overlay"></div>
                               <div class="halim-post-title-box">
                                  <div class="halim-post-title ">
@@ -45,15 +45,7 @@
                   </div>
                   <div class="clearfix"></div>
                   <div class="text-center">
-                     <ul class='page-numbers'>
-                       {{ $movies->links() }}
-                        {{-- <li><span aria-current="page" class="page-numbers current">1</span></li>
-                        <li><a class="page-numbers" href="">2</a></li>
-                        <li><a class="page-numbers" href="">3</a></li>
-                        <li><span class="page-numbers dots">&hellip;</span></li>
-                        <li><a class="page-numbers" href="">55</a></li>
-                        <li><a class="next page-numbers" href=""><i class="hl-down-open rotate-right"></i></a></li> --}}
-                     </ul>
+                     {{ $movies->links() }}
                   </div>
                </section>
             </main>

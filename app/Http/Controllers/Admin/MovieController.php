@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Models\Movie;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
@@ -55,8 +56,11 @@ class MovieController extends Controller
                     'title' => 'required|max:70|unique:movies,title',
                     'slug' => 'required|max:70|unique:movies,slug',
                     'desc' => 'required',
-                    'status' => 'required',
-                    'image' => 'required',
+                    'status' => 'required|in:1,0',
+                    'subtitles' => 'required|in:Viet Sub,Thuyết minh',
+                    'definition' => 'required|in:HD,Full HD',
+                    'feature' => 'required|in:1,0',
+                    'image' => 'required|image|max:2048',
                     'category_id' => 'required',
                     'genre_id' => 'required',
                     'country_id' => 'required',
@@ -65,7 +69,10 @@ class MovieController extends Controller
                 [
                     'title' => 'Tên',
                     'desc' => 'Mô tả',
-                    'status' => 'trạng thái',
+                    'subtitles' => 'Phụ đề',
+                    'definition' => 'Định dạng phim',
+                    'feature' => 'Movie Nổi bật',
+                    'status' => 'Trạng thái',
                     'category_id' => 'Danh mục',
                     'genre_id' => 'Thể loại',
                     'country_id' => 'Quốc gia',
@@ -91,17 +98,14 @@ class MovieController extends Controller
             return redirect()->route('admin.movies.create')
                 ->with('success', 'movie Created Successfully');
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors($validator)->with('error', $e->getMessage());
+            return redirect()->back()->withErrors($validator)->with('error', $e->getMessage())->withInput();
         }
     }
-
 
     public function show($id)
     {
 
     }
-
-
     public function edit($id)
     {
         try {
@@ -117,8 +121,6 @@ class MovieController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
-
-
     public function update(Request $request, $id)
     {
         //
@@ -127,11 +129,14 @@ class MovieController extends Controller
             $validator = Validator::make(
                 $input,
                 [
-                    'title' => 'required|max:70|unique:movies,slug,'. Movie::find($id)->id,
-                    'slug' => 'required|max:70|unique:movies,slug,'.  Movie::find($id)->id,
+                    'title' => 'required|max:70|unique:movies,slug,' . Movie::find($id)->id,
+                    'slug' => 'required|max:70|unique:movies,slug,' . Movie::find($id)->id,
                     'desc' => 'required',
-                    'status' => 'required',
-                    'image' => 'required',
+                    'status' => 'required|in:1,0',
+                    'subtitles' => 'required|in:Viet Sub,Thuyết minh',
+                    'definition' => 'required|in:HD,Full HD',
+                    'feature' => 'required|in:1,0',
+                    'image' => 'image|max:2048',
                     'category_id' => 'required',
                     'genre_id' => 'required',
                     'country_id' => 'required',
@@ -140,49 +145,66 @@ class MovieController extends Controller
                 [
                     'title' => 'Tên',
                     'desc' => 'Mô tả',
+                    'subtitles' => 'Phụ đề',
+                    'definition' => 'Định dạng phim',
+                    'feature' => 'Movie Nổi bật',
                     'status' => 'trạng thái',
                     'category_id' => 'Danh mục',
                     'genre_id' => 'Thể loại',
                     'country_id' => 'Quốc gia',
                 ]
             );
-
             if ($validator->fails()) {
                 throw new \Exception('Movie Created Error');
             }
-
             // image
-
             if ($request->hasFile('image')) {
-              
                 $file = $request->file('image');
+                if (!empty($file)) {
+                    unlink(Movie::find($id)->image);
+                }
                 $filename = $request->slug . '-' . time() . '.' . $file->getClientOriginalExtension();
                 $path = $file->move('public/uploads/movies', $filename);
                 $img = "public/uploads/movies/" . $filename;
                 $input['image'] = $img;
+
             }
 
             $update = $this->movieService->update($id, $input);
             $message = 'Update movie successfully <b>' . '<br>' . $update->title . '</br>';
             return redirect(route('admin.movies.index'))->with('success', $message);
-
         } catch (\Exception $e) {
 
-            return redirect()->back()->with('error', $e->getMessage())->withErrors($validator);
+            return redirect()->back()->with('error', $e->getMessage())->withErrors($validator)->withInput();
         }
-
     }
-
 
     public function destroy($id)
     {
 
         try {
-            
+
             $this->movieService->destroy($id);
             return redirect()->back()->with('success', 'movie Deleted Successfully');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
+
+
+
+    function updateYear(Request $request)
+    {
+        $data = $request->all();
+        $id = $data['id_movies'];
+        $movie = Movie::find($id);
+        if (!$movie) {
+            return response()->json(['message' => 'Movie not found.'], 404);
+        }
+        $movie->year = $data['year'];
+        $movie->save();
+        return response()->json(['message' => 'Year updated successfully.'], 200);
+
+    }
+
 }

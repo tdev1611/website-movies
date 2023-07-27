@@ -50,24 +50,26 @@
                 <h3 class="section-title"><span>Hot Movies</span></h3>
             </div>
             <div id="halim_related_movies-2" class="owl-carousel owl-theme related-film">
-                <article class="thumb grid-item post-38498">
-                    <div class="halim-item">
-                        <a class="halim-thumb" href="chitiet.php" title="Đại Thánh Vô Song">
-                            <figure><img class="lazy img-responsive"
-                                    src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://1.bp.blogspot.com/-w860_-tiHFI/YO7DW5hwmNI/AAAAAAAAJqg/yFXRsVIh70oslGUKU4Fg3NxipcmCiPt3ACLcBGAsYHQ/s320/unnamed.jpg"
-                                    alt="Đại Thánh Vô Song" title="Đại Thánh Vô Song"></figure>
-                            <span class="status">HD</span><span class="episode"><i class="fa fa-play"
-                                    aria-hidden="true"></i>Vietsub</span>
-                            <div class="icon_overlay"></div>
-                            <div class="halim-post-title-box">
-                                <div class="halim-post-title ">
-                                    <p class="entry-title">Đại Thánh Vô Song</p>
-                                    <p class="original_title">Monkey King: The One And Only</p>
+                @foreach ($movies_feature as $feature)
+                    <article class="thumb grid-item post-38498">
+                        <div class="halim-item">
+                            <a class="halim-thumb" href="{{ route('movie.detail',$feature->slug) }}" title="Đại Thánh Vô Song">
+                                <figure><img class="lazy img-responsive"
+                                        src="{{ $feature->image }}" alt="{{ $feature->title }}"
+                                       title="{{ $feature->title }}"></figure>
+                                <span class="status">{{ $feature->subtitles }}</span><span class="episode"><i class="fa fa-play"
+                                        aria-hidden="true"></i>{{ $feature->definition }}</span>
+                                <div class="icon_overlay"></div>
+                                <div class="halim-post-title-box">
+                                    <div class="halim-post-title ">
+                                        <p class="entry-title">{{ $feature->title }}</p>
+                                        <p class="original_title">{{ $feature->title_eng }}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                </article>
+                            </a>
+                        </div>
+                    </article>
+                @endforeach
             </div>
             <script>
                 $(document).ready(function($) {
@@ -119,13 +121,13 @@
                                                 alt="{{ $movie->title }}" title="{{ $movie->title }}">
                                         </figure>
                                         <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play"
-                                                aria-hidden="true"></i>Vietsub</span>
+                                                aria-hidden="true"></i>{{ $movie->subtitles }}</span>
                                         <div class="icon_overlay"></div>
                                         <div class="halim-post-title-box">
                                             <div class="halim-post-title ">
                                                 <p class="entry-title">{{ $movie->title }}</p>
                                                 <p class="original_title">
-                                                    {{ $movie->title }}
+                                                    {{ $movie->title_eng }}
                                                 </p>
                                             </div>
                                         </div>
@@ -133,21 +135,18 @@
                                 </div>
                             </article>
                         @endforeach
-
-
                     </div>
-
                 </section>
             @endforeach
             <div class="text-center">
-                <ul class='page-numbers'>
+                {{-- <ul class='page-numbers'>
                     <li><span aria-current="page" class="page-numbers current">1</span></li>
                     <li><a class="page-numbers" href="">2</a></li>
                     <li><a class="page-numbers" href="">3</a></li>
                     <li><span class="page-numbers dots">&hellip;</span></li>
                     <li><a class="page-numbers" href="">55</a></li>
                     <li><a class="next page-numbers" href=""><i class="hl-down-open rotate-right"></i></a></li>
-                </ul>
+                </ul> --}}
             </div>
             <div class="clearfix"></div>
         </main>

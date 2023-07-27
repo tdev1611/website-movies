@@ -11,7 +11,7 @@
                                 <h5>Edit country</h5>
                             </div>
                             <div class="col-md-6">
-                              
+
                                 <a href="{{ route('admin.countries.index') }}" class="btn btn-primary float-right">Back</a>
                             </div>
                             <div class="col-md-12 text-center ">
@@ -71,9 +71,12 @@
                                 <div class="form-group">
                                     <label for="status">Status</label>
                                     <select name="status" id="status" class="form-control">
-                                        <option value="1" @if ($country->status == 1) selected @endif>Active
+                                        <option value="{{ $country->id }}"
+                                            {{ old('status') == $country->id ? 'selected' : '' }} > {{$country->id }}
                                         </option>
-                                        <option value="0" @if ($country->status == 0) selected @endif>
+                                        <option value="1" {{ old('status') == 1 ? 'selected' : '' }}>Active
+                                        </option>
+                                        <option value="0" {{ old('status') == 0 ? 'selected' : '' }}>
                                             Inactive</option>
                                     </select>
                                 </div>

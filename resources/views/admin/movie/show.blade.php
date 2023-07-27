@@ -54,6 +54,16 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="title_eng">Movie Name English</label>
+                                    <input type="text" name="title_eng" class="form-control" id="title_eng"
+                                        value="{{ old('title_eng', $movie->title_eng) }}">
+                                </div>
+                                @error('title_eng')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
@@ -70,6 +80,7 @@
                                 <label for="file">Image</label>
                                 <div class="form-group">
                                     <input type="file" class="form-control" id="file" name="image">
+
                                     @error('image')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -77,14 +88,74 @@
                                 @if ($movie->image)
                                     <img style="width:20%; border:1px solid" src="{{ url($movie->image) }}" alt="">
                                 @endif
-
-
                             </div>
-                            <div class="col-md-12">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="subtitles">Subtitles</label>
+                                    <select class="form-control" id="subtitles" name="subtitles">
+                                        <option
+                                            value="{{ $movie->subtitles }}" {{ old('subtitles') == $movie->subtitles ? 'selected' : '' }}>
+                                            {{ $movie->subtitles }}</option>
+                                        <option value="Viet Sub"
+                                            style="{{ $movie->subtitles == 'Viet Sub' ? 'display:none' : '' }}">
+                                            VietSub
+                                        </option>
+                                        <option value="Thuyết minh"
+                                            style="{{ $movie->subtitles == 'Thuyết minh' ? 'display:none' : '' }}">
+                                            Thuyết minh</option>
+                                    </select>
+                                </div>
+                                @error('subtitles')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="definition">Definition</label>
+                                    <select class="form-control" id="definition" name="definition">
+                                        <option
+                                            value="{{ $movie->definition }}{{ old('definition') == $movie->definition ? 'selected' : '' }}">
+                                            {{ $movie->definition }}</option>
+                                        <option value="HD" {{ old('definition') == 'HD' ? 'selected' : '' }}
+                                            style="{{ $movie->definition == 'HD' ? 'display:none' : '' }}">
+                                            HD</option>
+                                        <option value="Full HD" {{ old('Full HD') == 'Full HD' ? 'selected' : '' }}
+                                            style="{{ $movie->definition == 'Full HD' ? 'display:none' : '' }}">
+                                            Full HD
+                                        </option>
+                                    </select>
+                                </div>
+                                @error('definition')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            {{--  --}}
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="feature">Feature</label>
+                                    <select class="form-control" id="feature" name="feature">
+                                        <option value="{{ $movie->feature }}">
+                                            {{ $movie->feature == 1 ? 'Nổi bật' : 'Không' }}</option>
+                                        <option value="1" {{ old('feature') == 1 }}>
+                                            Nổi bật
+                                        </option>
+                                        <option value="0" {{ old('feature') == 0 }}>
+                                            Không
+                                        </option>
+
+                                    </select>
+                                </div>
+                                @error('feature')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            {{--  --}}
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="status">Category</label>
                                     <select class="form-control" id="category_id" name="category_id">
-                                        <option value="">Chọn danh mục</option>
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}"
                                                 {{ $category->id == $movie->category_id ? 'selected' : '' }}>
@@ -100,7 +171,7 @@
                                 <div class="form-group">
                                     <label for="status">Genre</label>
                                     <select class="form-control" id="genre_id" name="genre_id">
-                                        <option value="">Chọn thể loại</option>
+
                                         @foreach ($genres as $genre)
                                             <option value="{{ $genre->id }}"
                                                 {{ $genre->id == $movie->category_id ? 'selected' : '' }}>
@@ -116,7 +187,7 @@
                                 <div class="form-group">
                                     <label for="status">Country</label>
                                     <select class="form-control" id="country_id" name="country_id">
-                                        <option value="">Chọn Quốc gia</option>
+
                                         @foreach ($countries as $country)
                                             <option value="{{ $country->id }}"
                                                 {{ $country->id == $movie->country_id ? 'selected' : '' }}>
@@ -133,10 +204,16 @@
                                 <div class="form-group">
                                     <label for="status">Status</label>
                                     <select name="status" id="status" class="form-control">
-                                        <option value="1" @if ($movie->status == 1) selected @endif>Active
+                                        <option value="{{ $movie->status }}">
+                                            {{ $movie->status == 1 ? 'Active' : 'Inactive' }}
                                         </option>
-                                        <option value="0" @if ($movie->status == 0) selected @endif>
-                                            Inactive</option>
+                                        <option value="1">
+                                            Active
+                                        </option>
+                                        <option value="2">
+                                            Inactive
+                                        </option>
+
                                     </select>
                                 </div>
                                 @error('status')

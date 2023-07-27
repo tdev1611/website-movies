@@ -2,6 +2,7 @@
 
 namespace App\Sevices\Admin;
 
+use Illuminate\Http\Request;
 use App\Models\Movie;
 
 class MovieService
@@ -26,9 +27,7 @@ class MovieService
         if (!$Movie) {
             throw new \Exception('not found Movie');
         }
-        if (!empty($Movie->image)) {
-            unlink($Movie->image);
-        }
+       
 
         $Movie->update($data);
         return $Movie;
@@ -39,9 +38,7 @@ class MovieService
         if (!$Movie) {
             throw new \Exception('not found Movie');
         }
-        if (!empty($Movie->image)) {
-            unlink($Movie->image);
-        }
+     
         return $Movie->delete();
 
     }
