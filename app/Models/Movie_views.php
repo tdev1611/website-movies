@@ -15,4 +15,10 @@ class Movie_views extends Model
         'movie_id',
     ];
 
+    public function movies()
+    {
+
+        return $this->belongsTo(Movie::class,'movie_id','id');
+
+    }
 }

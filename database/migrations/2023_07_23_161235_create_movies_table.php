@@ -30,7 +30,6 @@ class CreateMoviesTable extends Migration
             $table->string('subtitles')->default('Viet Sub')->comment('VietSub,  Thuyet Minh');
         
             $table->timestamps();
-
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('genre_id')->references('id')->on('genres')->onDelete('cascade');
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');

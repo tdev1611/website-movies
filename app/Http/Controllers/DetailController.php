@@ -22,7 +22,11 @@ class DetailController extends Controller
         try {
             $movie = $this->detailService->show($slug);
             $cateId = $movie->category->id;
+            // realte movie
             $category = $this->categoryService->getCategoryById($cateId);
+
+            // view_count
+
 
             return view('detail', compact('movie', 'category'));
 

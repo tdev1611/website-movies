@@ -125,19 +125,41 @@
                 <div class="collapse navbar-collapse" id="halim">
                     <div class="menu-menu_1-container">
                         <ul id="menu-menu_1" class="nav navbar-nav navbar-left">
-                            <li class="current-menu-item active"><a title="Trang Chủ" href="{{ route('home') }}">Trang Chủ</a>
+                            <li class="current-menu-item active"><a title="Trang Chủ"
+                                    href="{{ route('home') }}">Trang Chủ</a>
                             </li>
                             @foreach ($categories as $category)
                                 <li><a title="{{ $category->title }}"
-                                        href=" {{ route('category',$category->slug) }}">{{ $category->title }}</a></li>
+                                        href=" {{ route('category', $category->slug) }}">{{ $category->title }}</a>
+                                </li>
                             @endforeach
+
+
+
+
+                            <li class="mega dropdown">
+                                <a title="Năm" href="#" data-toggle="dropdown" class="dropdown-toggle"
+                                    aria-haspopup="true">Năm <span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                   
+                                    @for ($year =2001; $year <= 2023; $year++)
+                                    {{-- {{ route('cient.year') }} --}}
+                                        <li><a title="{{ $year }}" href="{{ url('nam/'.$year) }}"> {{ $year }} </a>
+                                        </li>
+                                    @endfor
+                                </ul>
+                            </li>
+
+
+
                             <li class="mega dropdown">
                                 <a title="Thể Loại" href="#" data-toggle="dropdown" class="dropdown-toggle"
                                     aria-haspopup="true">Thể Loại <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
                                     @foreach ($genres as $genre)
                                         <li><a title="{{ $genre->title }}"
-                                                href="{{ route('genre',$genre->slug) }}">{{ $genre->title }}</a></li>
+                                                href="{{ route('genre', $genre->slug) }}">{{ $genre->title }}</a>
+                                        </li>
                                     @endforeach
                                 </ul>
                             </li>
@@ -147,7 +169,8 @@
                                 <ul role="menu" class=" dropdown-menu">
                                     @foreach ($countries as $country)
                                         <li><a title="{{ $country->title }}"
-                                                href="{{ route('country',$country->slug) }}">{{ $country->title }}</a></li>
+                                                href="{{ route('country', $country->slug) }}">{{ $country->title }}</a>
+                                        </li>
                                     @endforeach
                                 </ul>
                             </li>

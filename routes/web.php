@@ -22,7 +22,7 @@ Route::get('/', [WelcomeController::class, 'index'])->name('home');
 Route::get('/danh-muc/{slug}', [MenuController::class, 'category'])->name('category');
 Route::get('/quoc-gia/{slug}', [MenuController::class, 'country'])->name('country');
 Route::get('/the-loai/{slug}', [MenuController::class, 'genre'])->name('genre');
-
+Route::get('nam/{year}', [MenuController::class, 'years'])->name('years');
 
 
 
@@ -34,8 +34,8 @@ Route::get('/chi-tiet/{slug}.html', [DetailController::class, 'index'])->name('m
 Auth::routes();
 
 // admin
-Route::group(['prefix' => 'admin','middleware' => ['auth',]], function () {
-         include 'admin.php';
+Route::group(['prefix' => 'admin', 'middleware' => ['auth',]], function () {
+    include 'admin.php';
 });
 
 

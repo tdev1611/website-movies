@@ -1,15 +1,15 @@
 @extends('layout-client.layout')
-@section('title', $category->title)
-
+@section('title', 'Phim'.$year)
 @section('content')
+
     <div class="row container" id="wrapper">
         <div class="halim-panel-filter">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-6">
                         <div class="yoast_breadcrumb hidden-xs"><span><span><a
-                                        href="{{ $category->slug }}">{{ $category->title }}</a> » <span
-                                        class="breadcrumb_last" aria-current="page">2020</span></span></span></div>
+                                        href="{{ $year }}">{{ $year }}</a> » <span
+                                        class="breadcrumb_last" aria-current="page"></span></span></span></div>
                     </div>
                 </div>
             </div>
@@ -20,7 +20,7 @@
         <main id="main-contents" class="col-xs-12 col-sm-12 col-md-8">
             <section>
                 <div class="section-bar clearfix">
-                    <h1 class="section-title"><span>{{ $category->title }}</span></h1>
+                    <h1 class="section-title"><span>{{ $year }}</span></h1>
                 </div>
                 <div class="halim_box">
                     @forelse ($movies as $movie)
@@ -29,7 +29,7 @@
                                 <a class="halim-thumb" href="{{ route('movie.detail', $movie->slug) }}"
                                     title="{{ $movie->title }}">
                                     <figure><img class="lazy img-responsive" src="{{ url($movie->image) }}"
-                                            alt="{{ $movie->title }}" title="VŨNG LẦY PHẦN 1"></figure>
+                                            alt="{{ $movie->title }}" title="{{ $movie->title }}"></figure>
                                     <span class="status">5/5</span><span class="episode"><i class="fa fa-play"
                                             aria-hidden="true"></i>{{ $movie->subtitles }}</span>
                                     <div class="icon_overlay"></div>
@@ -43,9 +43,8 @@
                             </div>
                         </article>
                     @empty
-                        <p>Hiện tại chưa có phim trong danh mục: <b>{{ $category->title }}</b> </p>
+                        <p>Hiện tại chưa có phim trong năm: <b>{{ $year }}</b> </p>
                     @endforelse
-
                 </div>
                 <div class="clearfix"></div>
                 <div class="text-center">
@@ -56,7 +55,8 @@
                         <li><span class="page-numbers dots">&hellip;</span></li>
                         <li><a class="page-numbers" href="">55</a></li>
                         <li><a class="next page-numbers" href=""><i class="hl-down-open rotate-right"></i></a></li>
-                     </ul> --}}
+                    </ul> --}}
+                 
                     {{ $movies->links() }}
                 </div>
             </section>
@@ -216,6 +216,8 @@
                                     </span>
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
                 </section>
